@@ -72,8 +72,17 @@ public class DottoreServiceImpl implements DottoreService {
 						cb.like(cb.upper(root.get("cognome")), "%" + dottoreExample.getCognome().toUpperCase() + "%"));
 
 			if (!StringUtils.isEmpty(dottoreExample.getCodiceDipendente()))
-				predicates.add(cb.like(cb.upper(root.get("cognome")),
+				predicates.add(cb.like(cb.upper(root.get("codiceDipendente")),
 						"%" + dottoreExample.getCodiceDipendente().toUpperCase() + "%"));
+			if (dottoreExample.isInServizio())
+				predicates.add(cb.isTrue(root.get("inServizio")));
+			else
+				predicates.add(cb.isFalse(root.get("inServizio")));
+
+			if (dottoreExample.isInVisita())
+				predicates.add(cb.isTrue(root.get("inVisita")));
+			else
+				predicates.add(cb.isFalse(root.get("inVisita")));
 
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
@@ -85,8 +94,8 @@ public class DottoreServiceImpl implements DottoreService {
 
 	@Override
 	public Dottore findByCodiceDipendente(String codiceInput) {
-	
-		return 	dottoreRepository.findByCodiceDipendente(codiceInput);
+
+		return dottoreRepository.findByCodiceDipendente(codiceInput);
 	}
 
 	@Override
@@ -94,7 +103,7 @@ public class DottoreServiceImpl implements DottoreService {
 		Dottore dottore = dottoreRepository.findByCodiceDipendente(codiceDipendente);
 		dottore.setInVisita(true);
 		return dottoreRepository.save(dottore);
-		
+
 	}
 
 }

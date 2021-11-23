@@ -20,11 +20,20 @@ public class Dottore {
 	public Dottore() {
 		// TODO Auto-generated constructor stub
 	}
-
 	public Dottore(Long id, String nome, String cognome, String codiceDipendente, boolean inVisita,
 			boolean inServizio) {
 		super();
 		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceDipendente = codiceDipendente;
+		this.inVisita = inVisita;
+		this.inServizio = inServizio;
+	}
+	
+
+	public Dottore(String nome, String cognome, String codiceDipendente, boolean inVisita, boolean inServizio) {
+		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.codiceDipendente = codiceDipendente;

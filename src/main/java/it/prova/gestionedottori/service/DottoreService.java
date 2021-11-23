@@ -13,7 +13,6 @@ public interface DottoreService {
 	public List<Dottore> listAll();
 
 	public Dottore cariscaSingoloElemento(Long id);
-	
 
 	Page<Dottore> searchAndPaginate(Dottore automobileExample, Integer pageNo, Integer pageSize, String sortBy);
 

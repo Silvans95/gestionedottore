@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.gestionedottori.dto.DottoreDTO;
+import it.prova.gestionedottori.exception.DottoreNotFoundException;
 import it.prova.gestionedottori.model.Dottore;
 import it.prova.gestionedottori.service.DottoreService;
 
@@ -77,7 +78,12 @@ public class DottoreRestController {
 
 	@PostMapping("/impostaInVisita")
 	public DottoreDTO impostaInVisita(@RequestBody Dottore dottore) {
-		
+
+		Dottore dottoreCaricato = dottoreService.impostaInVisita(dottore.getCodiceDipendente());
+
+		if (dottoreCaricato == null || dottoreCaricato.getId() == null)
+			throw new DottoreNotFoundException("Dottore non trovato con codice specificato");
+
 		return DottoreDTO.buildDottoreDTOFromModel(dottoreService.impostaInVisita(dottore.getCodiceDipendente()));
 	}
 

@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.prova.gestionedottori.dto.DottoreDTO;
 import it.prova.gestionedottori.model.Dottore;
 import it.prova.gestionedottori.service.DottoreService;
 
-
-
 @RestController
-@RequestMapping(value = "/api/dottore", produces = { MediaType.APPLICATION_JSON_VALUE })
+@RequestMapping(value = "/dottore", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class DottoreRestController {
 
 	@Autowired
@@ -70,15 +69,15 @@ public class DottoreRestController {
 	public void deleteDottore(@PathVariable(required = true) Long id) {
 		dottoreService.delete(dottoreService.get(id));
 	}
-	
 
 	@GetMapping("/{codiceDipendente}")
-	public Dottore verifica(@PathVariable(required = true) String codiceDipendente) {
-		return dottoreService.findByCodiceDipendente(codiceDipendente);
+	public DottoreDTO verifica(@PathVariable(required = true) String codiceDipendente) {
+		return DottoreDTO.buildDottoreDTOFromModel(dottoreService.findByCodiceDipendente(codiceDipendente));
 	}
+
 	@PostMapping("/impostaInVisita")
-	public Dottore impostaInVisita(@RequestBody String codiceDipendente) {
-		return dottoreService.impostaInVisita(codiceDipendente);
+	public DottoreDTO impostaInVisita(@RequestBody String codiceDipendente) {
+		return DottoreDTO.buildDottoreDTOFromModel(dottoreService.impostaInVisita(codiceDipendente));
 	}
 
 }

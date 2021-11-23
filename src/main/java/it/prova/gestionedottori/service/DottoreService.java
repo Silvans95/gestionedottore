@@ -14,13 +14,17 @@ public interface DottoreService {
 
 	public Dottore cariscaSingoloElemento(Long id);
 
-	Page<Dottore> searchAndPaginate(Dottore automobileExample, Integer pageNo, Integer pageSize, String sortBy);
+	public Page<Dottore> searchAndPaginate(Dottore automobileExample, Integer pageNo, Integer pageSize, String sortBy);
 
-	Dottore get(Long idInput);
+	public Dottore get(Long idInput);
 
-	Dottore save(Dottore input);
+	public Dottore save(Dottore input);
 
-	void delete(Dottore input);
+	public void delete(Dottore input);
+	
+	public Dottore findByCodiceDipendente(String codiceInput);
+
+	public Dottore impostaInVisita(String codiceDipendente);
 
 	
 }

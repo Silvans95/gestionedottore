@@ -70,5 +70,15 @@ public class DottoreRestController {
 	public void deleteDottore(@PathVariable(required = true) Long id) {
 		dottoreService.delete(dottoreService.get(id));
 	}
+	
+
+	@GetMapping("/{codiceDipendente}")
+	public Dottore verifica(@PathVariable(required = true) String codiceDipendente) {
+		return dottoreService.findByCodiceDipendente(codiceDipendente);
+	}
+	@PostMapping("/impostaInVisita")
+	public Dottore impostaInVisita(@RequestBody String codiceDipendente) {
+		return dottoreService.impostaInVisita(codiceDipendente);
+	}
 
 }

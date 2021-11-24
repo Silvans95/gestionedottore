@@ -64,8 +64,6 @@ public class DottoreRestController {
 		dottoreToUpdate.setNome(dottoreInput.getNome());
 		dottoreToUpdate.setCognome(dottoreInput.getCognome());
 		dottoreToUpdate.setCodiceDipendente(dottoreInput.getCodiceDipendente());
-		dottoreToUpdate.setInServizio(dottoreInput.isInServizio());
-		dottoreToUpdate.setInVisita(dottoreInput.isInVisita());
 		return dottoreService.save(dottoreToUpdate);
 	}
 
@@ -81,14 +79,15 @@ public class DottoreRestController {
 	}
 
 	@PostMapping("/impostaInVisita")
-	public DottoreDTO impostaInVisita(@RequestBody Dottore dottore) {
+	@ResponseStatus(HttpStatus.OK)
+	public DottoreDTO impostaInVisita(@RequestBody DottoreDTO dottore) {
 
 		Dottore dottoreCaricato = dottoreService.impostaInVisita(dottore.getCodiceDipendente());
 
 		if (dottoreCaricato == null || dottoreCaricato.getId() == null)
 			throw new DottoreNotFoundException("Dottore non trovato con codice specificato");
 
-		return DottoreDTO.buildDottoreDTOFromModel(dottoreService.impostaInVisita(dottore.getCodiceDipendente()));
+		return DottoreDTO.buildDottoreDTOFromModel(dottoreCaricato);
 	}
 
 }
